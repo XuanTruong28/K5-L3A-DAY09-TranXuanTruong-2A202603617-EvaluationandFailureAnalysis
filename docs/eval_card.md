@@ -29,3 +29,4 @@ Card này đi kèm mỗi báo cáo và được dùng lại ở Day 10.
   + Tập đánh giá hiện tại chỉ gồm 14 items, khoảng tin cậy thống kê còn rộng, chủ yếu phát hiện được các lỗi hồi quy lớn
   + Dữ liệu Judge được replay trên tập CSV cố định, chưa có tập held-out mù từ dữ liệu thực tế phát sinh
 - **Khi nào tăng eval-set version:** Khi mở rộng nghiệp vụ mới (bồi thường voucher, tranh chấp vận chuyển đa bên) hoặc bổ sung các ca biên (edge cases) phát hiện từ quá trình vận hành
+- **Bonus Port (+5đ):** Đã port thành công 3 code graders (`SecretLeak`, `ApprovalBypass`, `RefundAmountCorrect`) sang cả 2 chuẩn Inspect AI (`@scorer`) và DeepEval (`BaseMetric`) tại `src/eval/bonus_graders_port.py`, kiểm thử đối chứng xác nhận kết quả khớp 100%.
