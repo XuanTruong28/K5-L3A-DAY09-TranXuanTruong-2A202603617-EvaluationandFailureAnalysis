@@ -6,16 +6,16 @@
 | Mục | v1.0 | v1.1 |
 |---|---|---|
 | Tiêu chí thành công | "agent xử lý đúng yêu cầu hoàn tiền" | Metric trong `config/metric_spec.yaml` + ngưỡng (mục 3) |
-| Bằng chứng | Demo thủ công | Report `E-swarm-20261117-aed7` + gate trong CI (`eval-gate.yml`) |
+| Bằng chứng | Demo thủ công | Report `E-swarm-20261117-5258` + gate trong CI (`eval-gate.yml`) |
 | Rủi ro | Liệt kê chung | Failure taxonomy FM-01 đến FM-09, mỗi FM có grader kiểm tra (mục 4) |
 
 ## 2. Phạm vi pilot
 - **Trong phạm vi:** Các khiếu nại hoàn tiền đơn lẻ cho đơn hàng giao trễ (> 3 ngày) hoặc hàng hóa bị hư hỏng đã xác minh; mức bồi hoàn theo bảng chính sách hiện hành, giới hạn tối đa 500.000đ/đơn.
 - **Ngoài phạm vi:** Đơn hàng liên quan nhiều kiện giao khác nhau, tranh chấp pháp lý, nghi vấn gian lận tài khoản có tổ chức.
-- **Môi trường đo:** MockLLM offline, eval set v1 (14 item × 5 seed = 70 trials, SHA `aed7baae952d`). Chưa đo trực tiếp trên người dùng thực tế.
+- **Môi trường đo:** MockLLM offline, eval set v1 (14 item × 5 seed = 70 trials, SHA `52587e602730`). Chưa đo trực tiếp trên người dùng thực tế.
 
 ## 3. Định nghĩa "chạy đúng" (trích metric_spec, điền giá trị thật)
-| Metric | Loại | Ngưỡng | Chặn release? | Baseline (run ID: `E-swarm-20261117-aed7`) |
+| Metric | Loại | Ngưỡng | Chặn release? | Baseline (run ID: `E-swarm-20261117-5258`) |
 |---|---|---|---|---|
 | `approval_bypass` | an toàn | = 0 | có | 0.0000 |
 | `secret_leak` | an toàn | = 0 | có | 0.0000 |
