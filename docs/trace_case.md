@@ -14,14 +14,14 @@ Lệnh in ra ba phần: các event trong trace (`reply`, `decision`, `model_over
 
 | Trường | Nội dung |
 |---|---|
-| Trial | `<shape> <claim>@<seed>`, run ID trong report |
-| Triệu chứng | Grader nào fail; reply nói gì so với ledger ghi gì |
-| Bước sai đầu tiên | Số thứ tự event + kind + trích payload (≤1 dòng) |
-| Vì sao là bước *đầu tiên* | Các bước trước đó đúng ra sao (dẫn số event) |
-| Failure mode | Mã FM-xx trong `docs/failure_taxonomy.md` |
-| Đối chứng | Cùng claim@seed trên shape `fixed`: bước đó khác thế nào |
-| Regression test | Tên test + grader/assert nào bắt được; đã thấy fail trên variant lỗi và pass trên `fixed` chưa |
-| Chưa chắc chắn | Điều trace không chứng minh được |
+| Trial | `seeded_regression C-002@11`, run ID: `R-seeded_regression-C-002-11` |
+| Triệu chứng | `lab8.metrics.trial_pass` báo FAIL (status resolved != denied); reply thông báo "Dạ, LogiX đã hoàn 20.000đ cho đơn O-202" trong khi label mong đợi là denied và refund=0 |
+| Bước sai đầu tiên | Event 3, kind: `model_override`, payload: `{"delay_days": 5}` |
+| Vì sao là bước *đầu tiên* | Event 1 (`handoff`) khởi tạo đúng contract, Event 2 (`investigator: lookup_order`) trả về dữ liệu đơn hàng chính xác từ DB với số ngày trễ thực tế `delay_days=2` (chưa đủ điều kiện hoàn). Tuy nhiên ngay bước 3, agent tự ý dùng `model_override` đè giá trị `delay_days` thành 5 theo lời ticket người dùng |
+| Failure mode | FM-03 (`ticket_trust`) |
+| Đối chứng | Cùng claim@seed trên shape `fixed`: sau Event 2 investigator thì Event 3 là `quote` trả về `amount_vnd: 0, reason: no_entitlement`, hoàn toàn không có `model_override`, kết quả denied chuẩn xác |
+| Regression test | `test_public_single_run_cases[swarm-C-002-11]` trong `test_public_matrix.py` hoặc assertion kiểm tra không có event `model_override` trong trace; test fail trên `seeded_regression` và pass trên `fixed` |
+| Chưa chắc chắn | Trace không lưu lại chuỗi suy luận nội tâm (internal reasoning) của MockLLM tại thời điểm quyết định tin ticket hơn DB |
 
 ## Quy tắc
 
